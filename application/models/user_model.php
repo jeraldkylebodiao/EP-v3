@@ -15,7 +15,7 @@
 
   	public function create_post(){
 	    $config['upload_path'] = './assets/uploadposts';
-	    $config['allowed_types'] = 'gif|jpg|png|jpeg|JPG';
+	    $config['allowed_types'] = 'gif|jpg|png|jpeg|mp4';
 	    $this->load->library('upload' , $config);
 	    if(!$this->upload->do_upload()){
 		      $error = array('error' => $this->upload->display_errors());
@@ -65,7 +65,7 @@
 
   	public function updatepost(){
 	    $config['upload_path'] = './assets/uploadposts';
-	    $config['allowed_types'] = 'gif|jpg|png|jfif|jpeg|JPG';
+	    $config['allowed_types'] = 'gif|jpg|png|jfif|jpeg|mp4';
 	    $this->load->library('upload' , $config);
 	    if(!$this->upload->do_upload()){
 	      $error = array('error' => $this->upload->display_errors());

@@ -35,9 +35,8 @@
 								<img style="width: 100%;"; src="<?php echo base_url().'assets/uploadposts/'.$post->post_image;?>"><br/>
 							<?php endif;?>
 							<hr/>
-							<?php if($post->editors==1):?>
-								<a href="<?php echo base_url('editors_pick/addEP/' .$post->id)?>" class="btn btn-primary">Add to Editors Pick</a>
-							<?php endif?>
+
+							<a href="<?php echo base_url('editors_pick/addEP/' .$post->id)?>" class="btn btn-primary">Add to Editors Pick</a>
 							<a href="<?php echo base_url('admin/deletepost/' .$post->id) ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete this record?');">Delete</a>
 						</div>
 				
