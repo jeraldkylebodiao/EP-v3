@@ -1,0 +1,57 @@
+<!DOCTYPE html>  
+ <html>  
+	 <head>  
+	      	<title>EXPLORE PINAS</title>  
+	      	<link rel="stylesheet" 
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+			<style>
+				#posts{
+					background-color: white;
+					margin-bottom: 40px;
+					padding: 20px;
+					border-radius: 2px;
+					width: 80%;
+				}
+				body{
+					background-color: black;
+				}
+				#crt{
+					background-color: white;
+					border-radius: 2px;
+
+				}
+				#title{
+					text-align: center;
+				}
+			</style>
+	</head>
+	<body>
+
+
+		<div class="container-fluid" style="width: 100%; text-align: right; padding-top: 10px" >
+			<a href="<?php echo base_url().'main/logout'; ?>" class="btn btn-success btn-lg" ">Log Out</a>
+		</div>
+		<br/><br/>
+		
+      	<hr/><br/><br/>
+
+      		<label style="font-size: 50px; font-family: century gothic; font-weight: bold; color: white; margin: 20px;">LATEST POSTS</label><br/>
+			<?php 
+				if($posts){
+					foreach($posts as $post){
+
+			?>
+				<div class="container" id="posts">
+					<a href=""><?php echo '@'.$post->post_name;?></a><hr/>
+					<?php echo '<h3>'.$post->title.'</h3>'; ?><br/>
+					<?php echo $post->body; ?>
+				</div>
+				
+			<?php
+				}
+			}
+		?>
+
+		</div>
+ </body>  
+ </html>  

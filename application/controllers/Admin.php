@@ -24,11 +24,20 @@
 	  }
 	  
 	  
-	   private function admin($page){
-           $this->load->view("header");
-           $this->load->view($page);
-           $this->load->view("footer");
+		private function admin(){
+          if ($this->session->userdata('u_id')=='1') {
+             $this->load->view("header");
+             $this->load->view("admin");
+             $this->load->view("footer");
+          }
+          elseif ($this->session->userdata('u_id')=='2') {
+            redirect(base_url() . 'main/user');
+          }
+          else{
+            redirect(base_url());
+          }
       }
-
 	  
+			
+		   
  }

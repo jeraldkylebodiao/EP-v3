@@ -14,7 +14,7 @@
 		<div class="form-group row">
 			<label for="title" class="col-md-2 text-center">Description</label>
 			<div class="col-md-10">
-				<input type="text" value="<?php echo $blog->desc_name; ?>" name="txt_desc_name" class="form-control" required>
+				<textarea name="txt_desc_name" class="form-control" required><?php echo $blog->desc_name; ?></textarea>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -37,13 +37,22 @@
 		</div>
 		<div class="form-group row">
 			<label for="title" class="col-md-2 text-center">Tourist Spot Image</label>
-			<input type="file" name="userfile" size="20" required>
+			<input type="file" name="userfile" required>
+			
 		</div>
+		<div class="form-group row">
+			<label class="col-md-2 text-center">Current Image</label>
+			<div class="col-md-10 text-left">
+				<label><img style="width: 100%;"; src="<?php echo base_url().'assets/upload/'.$blog->ts_image;?>"></label>
+			</div>
+		</div>
+		
+		
 		<div class="form-group row">
 			<label class="col-md-2 text-center"></label>
 			<div class="col-md-12">
 				<input type="submit" name="btnUpdate" class="btn btn-success btn-lg" value="Update">
-				<a href="<?php echo base_url('main/index'); ?>" class="btn btn-danger btn-lg">Back</a>
+				<a href="<?php echo base_url('main/index'); ?>" class="btn btn-danger btn-lg">Cancel</a>
 			</div>
 		</div>
 

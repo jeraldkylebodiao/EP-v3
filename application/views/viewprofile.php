@@ -26,11 +26,8 @@
 			</style>
 	</head>
 	<body>
-
-
 		<div class="container-fluid" style="width: 100%; text-align: right; padding-top: 10px" >
-			<a href="<?php echo base_url().'main/logout'; ?>" class="btn btn-success btn-lg" ">Log Out</a>
-			<a href="<?php echo base_url().'main/viewprofile'; ?>" class="btn btn-warning btn-lg" ">View Profile</a>
+			<a href="<?php echo base_url().'main/user'; ?>" class="btn btn-success btn-lg" ">Home</a>
 
 		</div>
 		<br/><br/>
@@ -38,9 +35,9 @@
 		<div class="container" id="crt">
 			
            <h1><strong>CREATE POST</strong></h1> <br/>
-           
           
-	<?php echo form_open_multipart('main/create_post');?>
+          
+		<?php echo form_open_multipart('main/create_post_in_profile');?>
 
                 <input type="hidden" name="post_name" value="<?php echo $this->session->userdata('post_name');?>">
                 <div class="form-group row">  
@@ -65,41 +62,35 @@
           	 </form>  
       	</div>  
       	<hr/><br/><br/>
-
-      		<center><label style="font-size: 50px; font-family: century gothic; font-weight: bold; color: white; margin: 20px;">LATEST POSTS</label></center><br/>
+		<center><label style="font-size: 50px; font-family: century gothic; font-weight: bold; color: white; margin: 20px;">My Posts</label></center><br/>
 			<?php 
 				if($posts){
 					foreach($posts as $post){
 
 			?>
+			<?php if($post->post_name==$this->session->userdata('post_name')):?>
 				<div class="container" id="posts">
 					<a href="" style="font-size: 20px"><?php echo '@'.$post->post_name;?></a><hr/>
 					<?php echo '<h2 >'.$post->title.'</h2>'; ?><br/>
-					<!-- <?php if(pathinfo($post->post_image)['extension']=='mp4'):?>
+					<!--<?php if(pathinfo($post->post_image)['extension']=='mp4'):?>
 						<video width="100%" controls>
 							<source src="<?php echo base_url().'assets/uploadposts/'.$post->post_image;?>" type="video/mp4">
 						</video>
 						<br/>
 					<?php endif;?>
-					<?php if(pathinfo($post->post_image)['extension']!='mp4'):?> -->
-						<img style="width: 100%;"; src="<?php echo base_url().'assets/uploadposts/'.$post->post_image;?>"><br/>
-					 <!-- <?php endif;?> -->
+					<?php if(pathinfo($post->post_image)['extension']!='mp4'):?>-->
+						<img style="height: 50%;"; src="<?php echo base_url().'assets/uploadposts/'.$post->post_image;?>"><br/>
+					<!--<?php endif;?> -->
 					<?php echo '<label style="font-size:20px;">'.$post->body.'</label>'; ?><hr/>
-					<?php if($post->post_name==$this->session->userdata('post_name')):?>
-						<a href="<?php echo base_url('main/editpost/'.$post->id); ?>" class="btn btn-success">Edit</a>
-						<a href="<?php echo base_url('main/deletepost/' .$post->id) ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete this record?');">Delete</a> 
-					<?php endif;?>
+					<a href="<?php echo base_url('main/editpost_inprofile/'.$post->id); ?>" class="btn btn-success">Edit</a>
+					<a href="<?php echo base_url('main/deletepost_inprofile/' .$post->id) ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete this record?');">Delete</a>
+
 				</div>
-
-
-
-				
+			<?php endif;?>	
 			<?php
 				}
 			}
 		?>
 
-
-		</div>
- </body>  
- </html>  
+	</body>
+</html>

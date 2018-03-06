@@ -15,7 +15,7 @@
 			<div class="form-group row">
 				<label for="desc_name" class="col-md-2 text-center">Description</label>
 				<div class="col-md-10">
-					<input type="text" name="txt_desc_name" class="form-control" required>
+					<textarea  name="txt_desc_name" class="form-control" required></textarea>>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -40,7 +40,7 @@
 				<label class="col-md-2 text-center">Upload Image</label>
 				<input type="file" name="userfile" required >
 			</div>
-			<div class="form-group ">
+			<div class="form-group">
 				<label class="col-md-2 text-center"></label>
 				<div class="col-md-12">
 					<input type="submit" name="btnSave" class="btn btn-success btn-lg" value="Save">

@@ -19,39 +19,62 @@
     <link href="assets/css/homepage.min.css" rel="stylesheet">
   </head>
   <body>
-
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Explore Pinas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Events</a>
+            </li>
+        
+          </ul>
+        </div>
+      </div>
+    </nav>
 
 <header class="masthead text-white text-center">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto">
-            <h2 class="text-center">LOG IN</h2>
+            <h1 class="text-center" style="color: black"><strong>LOG IN</strong></h1>
           </div>
          
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto center">
                <?php
                 if($this->session->flashdata('success_msg')){
-            ?>
-            <div class="alert alert-success">
-              <?php echo $this->session->flashdata('success_msg'); ?>
-            </div>
-            <?php   
-              }
-            ?>
-            <?php
-                if($this->session->flashdata('error_msg')){
-              ?>
-                <div class="alert alert-success">
-                  <?php echo $this->session->flashdata('error_msg'); ?>
-                </div>
-              <?php   
-                }
-            ?>
+                ?>
+                    <div class="alert alert-success">
+                      <?php echo $this->session->flashdata('success_msg'); ?>
+                    </div>
+                <?php   
+                  }
+                ?>
+                <?php
+                    if($this->session->flashdata('error_msg')){
+                ?>
+                  <div class="alert alert-success">
+                   <?php echo $this->session->flashdata('error_msg'); ?>
+                  </div>
+                <?php   
+                  }
+                 ?>
            <form method="post" action="<?php echo base_url(); ?>main/login_val">
                 
                 <div class="form-group">   
-                     <input type="email" name="email" class="form-control" placeholder="Email" / required>  
+                     <input type="text" name="username" class="form-control" placeholder="Username" / required>  
                                   
                 </div>  
                 <div class="form-group">   
