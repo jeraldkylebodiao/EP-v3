@@ -1,11 +1,11 @@
 	<div class="container-fluid" >
 
-	<div class="container-fluid" style="width: 40%">
-		<a href="<?php echo base_url().'main/admin'; ?>" class="btn btn-danger btn-block">Back</a>
-		<a href="<?php echo base_url().'main/logout'; ?>" class="btn btn-success btn-block">Log Out</a>
+	<div class="container-fluid" style="width: 40% ; padding: 80px">
+		
 	</div>
-	<div class="container" style="width: 50%">
-		<a href="<?php echo base_url('main/add'); ?>" class="btn btn-primary btn-block">Add New Tourist Spot</a>
+	<div  class="container" style="width: 150%; text-align: center; padding: 80px" >
+		<a href="<?php echo base_url('main/add'); ?>" class="btn btn-primary btn-lg">Add New Tourist Spot</a>
+		<a href="<?php echo base_url().'main/admin'; ?>" class="btn btn-danger btn-lg">Back</a>
 		<hr/>
 	</div>
 	<?php
@@ -31,12 +31,8 @@
 	<table id="user_data" class="table table-bordered table-responsive">
 		<thead>
 			<tr>
-				<th style="width:30%">Image</th>
-				<th style="width:10%">Tourist Spot</th>
-				<th style="width:20%">Description</th>
-				<th style="width:10%">Region</th>
-				<th style="width:10%">Province</th>
-				<th style="width:10%">City</th>
+				<th style="width:30%">Username</th>
+				<th style="width:60%">Email</th>
 				<th style="width:10%">Action</th>
 			</tr>
 		</thead>
@@ -47,7 +43,6 @@
 
 		?>
 			<tr>
-				<td><img style="width: 100%;"; src="<?php echo base_url().'assets/upload/'.$blog->ts_image;?>"></td>
 				<td><?php echo $blog->tourist_name; ?></td>
 				<td><?php echo $blog->desc_name; ?></td>
 				<td><?php echo $blog->reg_name; ?></td>
