@@ -33,10 +33,11 @@
 	<strong><label id="title">REVIEW POST</label></strong><br/>
 	<?php echo form_open_multipart('editors_pick/addEditors');?>
 		<input type="hidden" name="id_hidden" value="<?php echo $post->id; ?>">
+		<input type="hidden" name="username_hidden" value="<?php echo $post->post_name; ?>">
 		<input type="hidden" name="editors" value="2">
 		<div id="buttons">
 			<input type="submit" name="btnUpdate" class="btn btn-success btn-md" value="Add to Editors Pick">
-			<a href="<?php echo base_url('admin/adminpost'); ?>" class="btn btn-danger btn-md">Cancel</a>
+			<a href="<?php echo base_url('gomenasai/view/' .$post->post_name); ?>" class="btn btn-danger btn-md">Cancel</a>
 		</div>
 		<label class="text-muted" id="posted">Posted by: <a href="" style="font-size: 20px"><?php echo '@'.$post->post_name;?></a></label>
 		<div>
@@ -49,9 +50,14 @@
 		</div>
 		
 		<div>
-			<?php if(pathinfo($post->post_image)['extension']!='mp4'):?>
-				<img style="width: 100%;"; src="<?php echo base_url().'assets/uploadposts/'.$post->post_image;?>"><br/>
-			<?php endif;?>
+
+			<?php if(!$post->post_image):?>
+				<img style="width: 50%;"; src="<?php echo base_url().'assets/default_photo/Logo.png';?>">
+			<?php else:?>
+				<img style="width: 50%;"; src="<?php echo base_url().'assets/uploadposts/'.$post->post_image;?>">
+			<?php endif?>
+			<br/>
+			
 		</div>
 		<br/>
 		

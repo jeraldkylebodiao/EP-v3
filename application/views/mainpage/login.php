@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home Page before login</title>
+    <title>Explore Pinas</title>
 
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -71,8 +71,8 @@
                 <?php   
                   }
                  ?>
-                
-           <form method="post" action="<?php echo base_url(); ?>main/login_val">
+            <?php echo form_open('aishiteru/login_val');?>
+          
                 
                 <div class="form-group">   
                      <input type="text" name="username" class="form-control" placeholder="Username" / required>  
@@ -88,7 +88,7 @@
                      ?> 
                      <br/>
                      <input type="submit" name="insert" value="Login" class="btn btn-primary btn-lg" />  
-                     <a href="<?php echo base_url('main/signup'); ?>" class="btn btn-success btn-lg">Sign Up</a>
+                     <a href="<?php echo base_url('aishiteru/signup'); ?>" class="btn btn-success btn-lg">Sign Up</a>
                 </div>  
             </form>
             

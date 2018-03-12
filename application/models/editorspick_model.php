@@ -4,6 +4,7 @@
 
 
  	public function getEp(){
+ 		$this->db->order_by('id', 'desc');
 	    $this->db->select('*');
 	    $this->db->from('user_posts');
 	    $this->db->where('editors',2);
