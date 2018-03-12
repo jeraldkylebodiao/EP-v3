@@ -7,7 +7,7 @@
 			<style>
 				
 				body{
-					margin: 50px;
+					
 					background-color: black;
 					color: white;
 					font-family: century gothic;
@@ -21,64 +21,47 @@
 					color: black;
 					font-size: 20px;
 				}
-				
+				#posts{
+					background-color: white;
+					color: black;
+					margin-bottom: 40px;
+					padding: 20px;
+					border-radius: 2px;
+					text-align: center;
+				}
 				
 			</style>
 <body>
 	 
-	<center><div class="container" style="margin: 20px; background-color: black; width: 40%">
-		<a href="<?php echo base_url().'admin/admin'; ?>" class="btn btn-danger btn-block">Back</a>
+	<div class="container-fluid" style="padding: 20px; background-color: black;  text-align: right">
+		<a href="<?php echo base_url().'gomenasai/bakana'; ?>" class="btn btn-danger btn-lg">Back</a>
+	</div>
 	
-	</div></center>
-	<div class=container>
-			 <center> <?php
-                if($this->session->flashdata('success_msg')){
-          ?>
-           	<div class="alert alert-success">
-                      <?php echo $this->session->flashdata('success_msg'); ?>
-                    </div>
-                <?php   
-                  }
-                ?>
-                <?php
-                    if($this->session->flashdata('error_msg')){
-                ?>
-                  <div class="alert alert-danger">
-                   <?php echo $this->session->flashdata('error_msg'); ?>
-                  </div>
-                <?php   
-                  }
-                 ?></center>
-		<table id="user_data" class="table table-bordered table-responsive " style="text-align: center;">
-			<thead>
-				<thead>
-					<tr>
-						<th style="width:40%">Username</th>
-						<th style="width:40%">Email</th>
-						<th style="width:10%">Action</th>						
-					</tr>
-			</thead>
-			<tbody>
-				<?php 
+
+	<div class="container-fluid">
+		<div class="group row">
+			<?php 
 					if($posts){
 						foreach($posts as $post){
 
-				?>
-					<tr>
-						<td><?php echo $post->username; ?></td>
-						<td><?php echo $post->email; ?></td>
-						<td>
-							<!--<a href="" class="btn btn-danger">View Profile</a>-->
-							<a href="<?php echo base_url('admin/view/'.$post->username); ?>" class="btn btn-success">View Profile</a>
-							
-						</td>
-					</tr>
-				<?php
+			?>
+			<div class="col-md-3">
+				<div class="container-fluid" id="posts">
+					<img style="width: 70%;"; src="<?php echo base_url().'assets/default_photo/default.png';?>"><br/>
+					<label><?php echo $post->full_name?></label><br/>
+					<label><?php echo $post->username?></label><br/>
+					<a href="<?php echo base_url('gomenasai/view/'.$post->username); ?>" class="btn btn-success">View Profile</a>
+					
+				</div>
+				
+			</div>
+			<?php
 						}
 					}
 				?>
-			</tbody>
-		</table>
+			
+		</div>
+		
 	</div>
 </body>
 </html>

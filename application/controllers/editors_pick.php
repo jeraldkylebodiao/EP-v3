@@ -28,6 +28,7 @@
   	}
 
   	public function addEditors(){
+        $username = $this->input->post('username_hidden');
       	$result = $this->m->addEditors();
         if($result){
           $this->session->set_flashdata('success_msg', 'User Story successfully added to Editors Pick.');
@@ -35,7 +36,7 @@
         else{
           $this->session->set_flashdata('error_msg', 'Already in Editors Pick');
         }
-        redirect(base_url('admin/adminpost'));
+        redirect(base_url('gomenasai/view/' .$username));
    	}
 
 }
