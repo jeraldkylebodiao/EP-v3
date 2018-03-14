@@ -1,27 +1,26 @@
-  <div class="container">  
+  <div class="container" style="width: 50%">  
             <br /><br /><br /> 
            <h1><strong>SIGN UP</strong></h1> <br/>
            <?php echo '<label id="msg" class="text-danger">'.$this->session->flashdata("error").'</label>'; ?> 
-           <form method="post" action="<?php echo base_url('main/submit') ?>"> 
-
+           <?php echo form_open('aishiteru/submit');?>
+         
                 <input type="hidden" name="user_role_id" value="2">
-                <div class="form-group row">  
-                     <label class="col-md-2 text-right">Username</label>  
+               <div class="form-group row">  
+                     <label class="col-md-2 text-right">Name</label>  
                      <div class="col-md-10">
-                         <input type="text" name="username" class="form-control" placeholder="Username" required/> 
+                         <input type="text" name="full_name" class="form-control" placeholder="Full Name" minlength="5" required/> 
                      </div>          
                 </div> 
                 <div class="form-group row">  
-                     <label class="col-md-2 text-right">Email</label>  
+                     <label class="col-md-2 text-right">Username</label>  
                      <div class="col-md-10">
-                        <input type="email" name="email" class="form-control" placeholder="example@example.com" required/>  
-                    </div>
-                                    
-                </div>  
+                         <input type="text" name="username" class="form-control" placeholder="Username" minlength="5" required/> 
+                     </div>          
+                </div>   
                 <div class="form-group row">  
                      <label class="col-md-2 text-right">Password</label>  
                      <div class="col-md-10">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required/>  
+                        <input type="password" name="password" class="form-control" placeholder="Password" minlength="8" required/>  
                     </div>
                 </div>  
 
