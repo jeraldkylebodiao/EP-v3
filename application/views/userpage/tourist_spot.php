@@ -49,6 +49,7 @@
 						<?php endif?>
 						<hr/>
 						<?php echo '<label style="font-size:15px;">'.$spot->address.'</label>'; ?>
+						<br/>
 					</div>
 				</div>
 				<?php

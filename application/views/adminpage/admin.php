@@ -1,6 +1,7 @@
 
 <div class="container-fluid" style="width: 100%; text-align: right;" >
 	<a href="<?php echo base_url().'aishiteru/logout'; ?>" class="btn btn-primary btn-lg" ">Log Out</a>
+	<a href="<?php echo base_url().'origin/addOP'; ?>" class="btn btn-danger btn-lg" ">Add Places</a>
 	
 	
 </div>
@@ -21,7 +22,7 @@
 				<div  id="controls" class="carousel slide" data-ride="carousel">
 					  <div class="carousel-inner">
 						    <div class="carousel-item active">
-						    	<img class="d-block w-100" style="height: 400px;"; src="<?php echo base_url().'assets/default_photo/Logo.png';?>">
+						    	<img class="d-block w-100" style="height: 400px;"; src="<?php echo base_url().'assets/default_photo/1.jpg';?>">
 						    </div>
 
 					    	<?php 
@@ -61,20 +62,21 @@
 <div class="container-fluid">
 	<div class="group row">
 		<div class="col-md-3" style="background-color: black; color: white">
-			<label style="font-size: 50px; font-weight: bold">User Stories</label><br/>
-			<label class="text-muted" style="font-size: 13px">Stories posted by users.</label>
+			<label style="font-size: 50px; font-weight: bold">Users</label><br/>
+			<label class="text-muted" style="font-size: 13px">User stories and trips.</label>
 			<hr/>
-			<label>View User Stories</label><br/><br/>
-			<label>Delete User Story</label><br/><br/>
-			<label>Add User Story to Editors Pick</label><hr/>
-			<center><a href="<?php echo base_url().'gomenasai/adminpost'; ?>" class="btn btn-danger btn-lg"  style="margin-bottom: 10px" >Manage User Stories</a></center>
+			<label>View User Stories</label><br/>
+			<label>Delete User Story</label><br/>
+			<label>Add User Story to Editors Pick</label><br/>
+			<label>View User's Trips</label><hr/>
+			<center><a href="<?php echo base_url().'gomenasai/adminpost'; ?>" class="btn btn-danger btn-lg"  style="margin-bottom: 10px" >Manage Users</a></center>
 		</div>
 		<div class="col-md-9">
 			<div class="container-fluid">
 				<div  id="controls2" class="carousel slide" data-ride="carousel">
 					  <div class="carousel-inner">
 						    <div class="carousel-item active">
-						    	<img class="d-block w-100" style="height: 400px;"; src="<?php echo base_url().'assets/default_photo/Logo.png';?>">
+						    	<img class="d-block w-100" style="height: 400px;"; src="<?php echo base_url().'assets/default_photo/2.jpg';?>">
 						    </div>
 
 					    	<?php 
@@ -127,7 +129,7 @@
 				<div  id="controls3" class="carousel slide" data-ride="carousel">
 					  <div class="carousel-inner">
 						    <div class="carousel-item active">
-						    	<img class="d-block w-100" style="height: 400px;"; src="<?php echo base_url().'assets/default_photo/Logo.png';?>">
+						    	<img class="d-block w-100" style="height: 400px;"; src="<?php echo base_url().'assets/default_photo/3.jpg';?>">
 						    </div>
 
 					    	<?php 

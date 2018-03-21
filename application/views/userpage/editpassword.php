@@ -48,7 +48,7 @@
 			<label class="col-md-2 text-center"></label>
 			<div class="col-md-12">
 				<input type="submit" name="btnUpdate" class="btn btn-success btn-lg" value="Save">
-				<a href="<?php echo base_url('dashboard/editaccount/' .$data->username); ?>" class="btn btn-danger btn-lg">Cancel</a>
+				<a href="<?php echo base_url('dashboard/account/' .$data->username); ?>" class="btn btn-danger btn-lg">Cancel</a>
 			</div>
 		</div>
 

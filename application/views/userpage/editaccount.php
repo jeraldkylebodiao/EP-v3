@@ -53,12 +53,15 @@
 		<?php echo '<label id="msg" class="text-danger">'.$this->session->flashdata("error").'</label>'; ?> 
 		<input type="hidden" name="id_hidden" value="<?php echo $data->id; ?>">
 		<input type="hidden" name="username_hidden" value="<?php echo $data->username; ?>">
-		<div class="form-group row">
-			<label for="title" class="col-md-2 text-center"><strong>Full Name</strong></label>
-			<div class="col-md-10">
-				<input type="text" value="<?php echo $data->full_name; ?>" name="txt_fname" class="form-control" required>
+		<input type="hidden" name="verification_hidden" value="<?php echo $data->verification; ?>">
+		<?php if($data->verification!='verified'):?>
+			<div class="form-group row">
+				<label for="title" class="col-md-2 text-center"><strong>Full Name</strong></label>
+				<div class="col-md-10">
+					<input type="text" value="<?php echo $data->full_name; ?>" name="txt_fname" class="form-control" required>
+				</div>
 			</div>
-		</div>
+		<?php endif;?>
 		<div class="form-group row">
 			<label for="title" class="col-md-2 text-center"><strong>Username</strong></label>
 			<div class="col-md-10">
@@ -70,9 +73,9 @@
 		<div class="form-group row">
 			<label class="col-md-2 text-center"></label>
 			<div class="col-md-12">
-				<a href="<?php echo base_url('dashboard/editpassword/'.$data->username); ?>" class="btn btn-warning btn-md">Edit Password</a>
+				
 				<input type="submit" name="btnUpdate" class="btn btn-success btn-md" value="Save">
-				<a href="<?php echo base_url('dashboard/account'); ?>" class="btn btn-danger btn-md">Cancel</a>
+				<a href="<?php echo base_url('dashboard/account/' .$data->username); ?>" class="btn btn-danger btn-md">Cancel</a>
 			</div>
 		</div>
 
