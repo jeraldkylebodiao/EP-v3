@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EXPLORE PINAS</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 80%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+    </style>
+
+    <script>
+      var map;
+      var infowindow;
+      var palit;
+///****NEARBY MODIFIER****///
+        
+        var restaurant = ['restaurant']
+        var school = ['school']
+        var atm = ['atm']
+        var park = ['park']
+        var bus_station = ['bus_station']
+        var museum = ['museum']
+        var police = ['police']
+        var hospital = ['hospital']
+
+///BUTTONS CLICK///
+$(document).ready(function(){
+    $("#btn1").click(function()
+    {
+        $("#test1").text("ATMs");
+        palit = atm
+        initMap();
+    });
+    $("#btn2").click(function(){
+        $("#test2").html("Restaurants");
+        palit = restaurant
+        initMap();
+    });
+    $("#btn3").click(function(){
+        $("#test3").val("Park");
+        palit = park
+        initMap();
+    });
+    $("#btn4").click(function(){
+        $("#test4").val("Bus Station");
+        palit = bus_station
+        initMap();
+    });
+    $("#btn5").click(function(){
+        $("#test5").val("Musem");
+        palit = museum
+        initMap();
+    });
+    $("#btn6").click(function(){
+        $("#test6").val("Police");
+        palit = police
+        initMap();
+    });
+    $("#btn7").click(function(){
+        $("#test7").val("Hospital");
+        palit = hospital
+        initMap();
+    });
+
+
+
+});
+///////////////////////////////////////////////////////////////
+      function initMap() 
+      {
+
+        //VARIABLE DAPAT DITO IS YUNG FROM INPUT//
+        var tup = {lat: 14.5874, lng: 120.9839};
+
+        map = new google.maps.Map(document.getElementById('map'), 
+        {
+          center: tup,
+          zoom: 16
+        });
+////////MAP AUTOCOMPLETE//////
+        var input = document.getElementById('pac-input');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+        
+        var infoauto = new google.maps.InfoWindow();
+        var infoautocontent = document.getElementById('infoauto-content');
+        infoauto.setContent(infoautocontent);
+        var markerauto = new google.maps.Marker(
+        {
+          map: map,
+          anchorPoint: new google.maps.Point(0,-29)
+        });   
+        
+        autocomplete.addListener('place_changed', function()
+        {
+          infowindow.close();
+          marker.setVisible(false);
+          var origin = autocomplete.getPlace();
+          if (!origin.geometry)
+          {
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+           // If the place has a geometry, then present it on a map.
+          if (origin.geometry.viewport) {
+            map.fitBounds(origin.geometry.viewport);
+          } else {
+            map.setCenter(origin.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setPosition(origin.geometry.location);
+          marker.setVisible(true);
+
+          var address = '';
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindowContent.children['place-icon'].src = place.icon;
+          infowindowContent.children['place-name'].textContent = place.name;
+          infowindowContent.children['place-address'].textContent = address;
+          infowindow.open(map, marker);
+
+        });
+////////MAP AUTOCOMPLETE/////
+//***CENTER CONTROLS***///
+        var centerControlDiv = document.createElement('div');
+        var centerControl = new CenterControl(centerControlDiv, map);
+        centerControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+//***CENTER CONTROLS***///
+
+//** ANG PAGLALAGAY NG MARKER NG MAIN PLACE AY DITO **//
+//-----------------------------------
+        var service = new google.maps.places.PlacesService(map);
+        service.getDetails(
+          {
+            placeId: 'ChIJFSAwrCHKlzMR2RBQkQ_K3JI' //tup manila
+          },
+          function(place, status) 
+          {
+            if (status === google.maps.places.PlacesServiceStatus.OK) 
+            {
+              var marker = new google.maps.Marker(
+              {
+                map: map,
+                position: place.geometry.location               
+              });
+            }
+          }
+        );        
+//----------------------------------
+// KAPAG KINLICK YUNG BUTTON SA GITNA, DAPAT MAGPAPALIT NG TYPE SA NEARBY // 
+        //nearby filters//
+
+        infowindow = new google.maps.InfoWindow();
+        service.nearbySearch({
+          location: tup,
+          radius: 500,
+          type: palit
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+
+      //marker area//
+      function createMarker(place) {
+        //markers for nearby//
+        var placeLoc = place.geometry.location;        
+        var marker = new google.maps.Marker(
+          {
+            map: map,
+            position: place.geometry.location,
+            icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' 
+
+          });
+        
+
+        //dialog box//
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
+//**************CUSTOM CONTROLS STARTS HERE******************//
+function CenterControl(controlDiv, map) 
+{
+// ETONG TUP NA VARIABLE DAPAT FROM INPUT USER //        
+        var tup = {lat: 14.5874, lng: 120.9839};
+// DESIGN NG CONTROL BOX
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+// DESIGN NG LOOB NG CONTROL
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Center';
+        controlUI.appendChild(controlText);
+// PAGCLICK, GIGITNA PAPUNTANG AREA
+        var pindot = controlUI.addEventListener('click', function() 
+        {
+          map.setCenter(tup);
+        });
+}
+      
+    </script>
+  </head>
+
+
+  <body>
+    <p>Origin</p>
+    <input type="text" id="pac-input" required="required" placeholder="Location from">
+    <input type="submit">
+    <div id="map"></div>
+    <div align="center">
+        <br>
+        <button id="btn1">ATM</button>
+        <button id="btn2">Restaurant</button>
+        <button id="btn3">Park</button>
+        <button id="btn4">Bus Station</button>
+        <button id="btn5">Museum</button>
+        <button id="btn6">Police</button>
+        <button id="btn7">Hospital</button>
+
+
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6dMPHhw9fGXuua6e0tTgqN02X5OFawFQ&libraries=places&callback=initMap" async defer></script>
+  </body>
+</html>
