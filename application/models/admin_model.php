@@ -79,7 +79,7 @@
 	    $field = array(
 		      'tourist_name'=>$this->input->post('txt_tourist_name'),
 		      'desc_name'=>$this->input->post('txt_desc_name'),
-		      'address'=>$this->input->post('txt_address'),
+		      'address'=>$this->input->post('txt_address')
 		     
 	    );
 	    $this->db->where('id', $id);
@@ -116,6 +116,26 @@
 	     	return false;
 	    }
   	}
+  	public function verify(){
+	    $this->db->order_by('id', 'desc');
+	    $query = $this->db->get('accountverifier');
+	    if($query->num_rows() > 0){
+	      	return $query->result();
+	    }
+	    else{
+	      	return false;
+	    }
+  	}
+  	public function verifyTour(){
+	    $this->db->order_by('id', 'desc');
+	    $query = $this->db->get('usertrips');
+	    if($query->num_rows() > 0){
+	      	return $query->result();
+	    }
+	    else{
+	      	return false;
+	    }
+  	}
 
   	public function info($username){
   		$this->db->order_by('id', 'desc');
@@ -124,6 +144,42 @@
 	    $this->db->where('post_name',$username);
 	    $query=$this->db->get();
 	    return $query->result();
+  	}
+  	public function trips($username){
+  		$this->db->order_by('id', 'desc');
+	    $this->db->select('*');
+	    $this->db->from('usertrips');
+	    $this->db->where('user',$username);
+	    $query=$this->db->get();
+	    return $query->result();
+  	}
+  	public function verifyById($username){
+  		$this->db->order_by('id', 'desc');
+	    $this->db->select('*');
+	    $this->db->from('accountverifier');
+	    $this->db->where('username',$username);
+	    $this->db->where('status','not verified');
+	    $query=$this->db->get();
+	    return $query->result();
+  	}
+  	public function verifyTourById($username){
+  		$this->db->order_by('id', 'desc');
+	    $this->db->select('*');
+	    $this->db->from('usertrips');
+	    $this->db->where('user',$username);
+	    $this->db->where('tourstatus','not approved');
+	    $query=$this->db->get();
+	    return $query->result();
+  	}
+  	public function getTouristSpot(){
+	    $this->db->order_by('tourist_name', 'asc');
+	    $query = $this->db->get('tbl_blogs');
+	    if($query->num_rows() > 0){
+	      	return $query->result();
+	    }
+	    else{
+	      	return false;
+	    }
   	}
   	public function getPosts(){
   		$this->db->order_by('id', 'desc');

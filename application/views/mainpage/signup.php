@@ -1,10 +1,11 @@
-  <div class="container">  
+  <div class="container" style="width: 50%">  
             <br /><br /><br /> 
            <h1><strong>SIGN UP</strong></h1> <br/>
            <?php echo '<label id="msg" class="text-danger">'.$this->session->flashdata("error").'</label>'; ?> 
            <?php echo form_open('aishiteru/submit');?>
          
                 <input type="hidden" name="user_role_id" value="2">
+                <input type="hidden" name="verification" value="not verified">
                <div class="form-group row">  
                      <label class="col-md-2 text-right">Name</label>  
                      <div class="col-md-10">

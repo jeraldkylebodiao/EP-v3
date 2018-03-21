@@ -32,6 +32,7 @@
               'username'=>$this->input->post('username'),
               'password'=>$pass,
               'user_role_id'=>$this->input->post('user_role_id'),
+              'verification'=>$this->input->post('verification')
           );
           if($this->check_username($field['username'])){
               $this->session->set_flashdata('error', 'USERNAME already taken');

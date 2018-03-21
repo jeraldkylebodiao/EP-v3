@@ -56,6 +56,8 @@
 					<input type="text" name="txt_address" class="form-control" required>
 				</div>
 			</div>
+			
+
 			<div class="form-group row">
 				<label class="col-md-2 text-center">Upload Image</label>
 				<div class="col-md-10 text-left">

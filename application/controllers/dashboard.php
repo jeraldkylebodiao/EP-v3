@@ -8,10 +8,23 @@
     	}      
 
     	public function user(){
+           $getSession = $this->m->getSession($this->session->userdata('post_name'));
+                if ($getSession) {
+                 
+                 $check_session = array(
+                                'request' => '2',
+                                
+                 ); 
+                $this->session->set_userdata($check_session);
+          }
+          //print_r($this->session->userdata('request'));exit();
+
           if ($this->session->userdata('u_id')=='2') {
              $data['posts'] = $this->m->getPost();
              $data['spots'] = $this->m->getTouristSpot();
              $data['editors'] = $this->m->getEp();
+             $data['account'] = $this->m->getAccount($this->session->userdata('post_name'));
+             //print_r($data['account']);exit();
              $this->load->view("userpage/users" ,$data);
 
           }            
@@ -34,10 +47,30 @@
           $data['editors'] = $this->m->getEp();
          $this->load->view('userpage/editorspick',$data);
       }
-      public function account(){
+      public function account($username){
         $account['data']=$this->m->account();
+        $account['verify']=$this->m->verify($username);
+        if ($account) {
+            $x = 0;
+            $count= -1;
+            $aydee = array();
+            foreach ($account['verify'] as $result) {
+                $aydee[] = $result->id;
+                $count++;
+            }
+            if ($count>=0) {
+              $latest=$aydee[$count];
+              $account['latest']=$this->m->getLatest($latest);
+            }
+            else{
+              $latest=0;
+              $account['latest']=$this->m->getLatest($latest);
+            }
+           
+        }       
         $this->load->view('userpage/account',$account);
       }
+     
       public function editaccount($username){
         $account['data']=$this->m->editaccount($username);
         $this->load->view('userpage/editaccount',$account);
@@ -53,12 +86,6 @@
                   $this->session->set_flashdata('error_msg', 'Post failed to add!');
               }
               redirect(base_url() . 'dashboard/user');
-          }
-          elseif($this->session->userdata('u_id')=='1'){
-              redirect(base_url() . 'gomenasai/bakana');
-          }
-          else{
-              redirect(base_url());
           }
 
     }
@@ -127,8 +154,16 @@
     }
 
     public function deletepost_inprofile($id){
+      if ($this->session->userdata('u_id')=='2') {
         $result = $this->m->deletepost($id);
         redirect(base_url('dashboard/viewprofile'));
+          }
+        elseif($this->session->userdata('u_id')=='1'){
+            redirect(base_url() . 'gomenasai/bakana');
+        }
+        else{
+            redirect(base_url());
+        }
     }
 
     public function updatepost_inprofile(){
@@ -188,7 +223,7 @@
             $this->session->set_flashdata('success_msg', 'Account Updated Successfully');
         }
        
-           redirect(base_url('dashboard/account'));
+           redirect(base_url('dashboard/account/').$this->session->userdata('post_name'));
         }
         elseif($this->session->userdata('u_id')=='1'){
             redirect(base_url() . 'gomenasai/bakana');
@@ -199,8 +234,16 @@
     }
       
     public function editpassword($username){
+       if ($this->session->userdata('u_id')=='2') {
         $pass['data'] = $this->m->getPassword($username);
         $this->load->view('userpage/editpassword',$pass);
+          }
+        elseif($this->session->userdata('u_id')=='1'){
+            redirect(base_url() . 'gomenasai/bakana');
+        }
+        else{
+            redirect(base_url());
+        }
     }
 
     public function updatePassword(){
@@ -214,8 +257,16 @@
     }
 
     public function updatePostImage($post_image){
+       if ($this->session->userdata('u_id')=='2') {
        $img['data'] = $this->m->getImage($post_image);
       $this->load->view("userpage/updatePostImage",$img);
+          }
+        elseif($this->session->userdata('u_id')=='1'){
+            redirect(base_url() . 'gomenasai/bakana');
+        }
+        else{
+            redirect(base_url());
+        }
     }
     public function changeImage(){
     $id = $this->input->post('id_hidden');
@@ -225,6 +276,28 @@
         }
      redirect(base_url('dashboard/editpost/' .$id));
   }
+  public function option(){
+    $data['spots'] = $this->m->getTouristSpot();
+    $this->load->view('trialOption',$data);
+  }
 
+
+  public function viewtrips(){
+     if ($this->session->userdata('u_id')=='2') {
+      $data['trips'] = $this->m->getTrips();
+      $data['tourist'] = $this->m->getTouristSpot();
+      $data['joined'] = $this->m->getJoined($this->session->userdata('post_name'));
+      $this->load->view('trips/viewtrips',$data);
+    }
+  }
+
+
+
+    public function cancelTrip($tripIdNumber){
+      if($this->session->userdata('u_id')=='2') {
+        $result = $this->m->cancelTrip($tripIdNumber);
+        redirect(base_url('dashboard/viewtrips'));
+      }
+    } 
 
 }

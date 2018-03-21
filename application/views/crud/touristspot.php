@@ -49,7 +49,7 @@
 						<?php echo '<label style="font-size:15px;">'.$blog->address.'</label>'; ?>
 							<hr/>
 						<a href="<?php echo base_url('gomenasai/edit/'.$blog->id); ?>" class="btn btn-success btn-sm">Edit</a>
-					<a href="<?php echo base_url('gomenasai/delete/'.$blog->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this record?');">Delete</a>
+						<a href="<?php echo base_url('gomenasai/delete/'.$blog->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this record?');">Delete</a>
 					</div>
 				</div>
 				<?php

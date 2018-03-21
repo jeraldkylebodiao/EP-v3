@@ -30,8 +30,10 @@
 	</head>
 	<body>
 		<div class="container-fluid" style="width: 100%; text-align: right; padding-top: 10px" >
-			<a href="<?php echo base_url().'dashboard/user'; ?>" class="btn btn-success btn-lg" ">Home</a>
-			<a href="<?php echo base_url().'dashboard/account'; ?>" class="btn btn-primary btn-lg" ">Account</a>
+			<a href="<?php echo base_url().'dashboard/user'; ?>" class="btn btn-success " ">Home</a>
+			<a href="<?php echo base_url().'tours/maketour/' .$this->session->userdata('post_name'); ?>" class="btn btn-danger " ">Make your own trip</a>
+			<a href="<?php echo base_url().'dashboard/account/' .$this->session->userdata('post_name'); ?>" class="btn btn-warning " ">Account</a>
+			<a href="<?php echo base_url().'dashboard/viewtrips'; ?>" class="btn btn-primary " ">My Trips</a>
 
 		</div>
 		<br/><br/>
@@ -79,7 +81,7 @@
 					<?php endif?>
 					<?php echo '<label style="font-size:20px;">'.$post->body.'</label>'; ?><hr/>
 					<a href="<?php echo base_url('dashboard/editpost_inprofile/'.$post->id); ?>" class="btn btn-success">Edit</a>
-					<a href="<?php echo base_url('dashboard/deletepost_inprofile/' .$post->id) ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete this record?');">Delete</a>
+					<a href="<?php echo base_url('dashboard/deletepost_inprofile/' .$post->id) ?>" class="btn btn-danger" onclick="return confirm('Do you want to cancel this trip');">Delete</a>
 
 				</div>
 			<?php endif;?>

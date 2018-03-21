@@ -12,6 +12,17 @@
 	      	return false;
 	    }
   	}
+  	public function getSession($username){
+        $this->db->where('username', $username);
+        $this->db->where('verification', 'verified');
+        $this->db->get('users');
+        if($this->db->affected_rows() > 0){
+          return true;
+        }
+        else{
+          return false;
+        }
+    }
   	public function getEp(){
  		$this->db->order_by('id', 'desc');
 	    $this->db->select('*');
@@ -20,15 +31,16 @@
 	    $query=$this->db->get();
 	    return $query->result();
   	}
+  	public function getAccount($username){
+  		$this->db->where('username',$username);
+  		$query=$this->db->get('users');
+  		return $query->result();
+
+  	}
   	public function getTouristSpot(){
 	    $this->db->order_by('tourist_name', 'asc');
 	    $query = $this->db->get('tbl_blogs');
-	    if($query->num_rows() > 0){
 	      	return $query->result();
-	    }
-	    else{
-	      	return false;
-	    }
   	}
   		public function account(){
 	    $this->db->order_by('id', 'desc');
@@ -40,7 +52,17 @@
 	      	return false;
 	    }
   	}
- 
+  
+ 	public function verify($username){
+  		$this->db->where('username',$username);
+  		$data=$this->db->get('accountverifier')->result();
+  		return $data;
+  	}
+  	public function getLatest($latest){
+  		$this->db->where('id',$latest);
+  		$newLatest=$this->db->get('accountverifier');
+  		return $newLatest->result();
+  	}
 
   	public function create_post(){
 	    $config['upload_path'] = './assets/uploadposts';
@@ -49,7 +71,7 @@
 	    if(!$this->upload->do_upload()){
 		      $error = array('error' => $this->upload->display_errors());
 		      $post_image = $_FILES['userfile']['name'];
-		      echo "wakaranai";
+		     
 	    }
 	    else{
 		      $field = array('upload_data' => $this->upload->data());
@@ -152,10 +174,19 @@
 	public function updateaccount(){
 	    $id = $this->input->post('id_hidden');
 	   	$username = $this->input->post('username_hidden');	
-	    $field = array(
-	      'full_name'=>$this->input->post('txt_fname'),
-	      'username'=>$this->input->post('txt_username')
-	     );
+	   	$verif = $this->input->post('verification_hidden');	
+ 	   	if($verif=='verified'){
+	   		$field = array(
+		      'username'=>$this->input->post('txt_username')
+	    	 );
+	   	}
+	   	else{
+	   		$field = array(
+			      'full_name'=>$this->input->post('txt_fname'),
+			      'username'=>$this->input->post('txt_username')
+	     	);
+	   	}
+	  
 	     if($this->check_username($field['username'])){
               $this->session->set_flashdata('error', 'USERNAME already taken');
               redirect(base_url('dashboard/editaccount/') .$username );
@@ -166,11 +197,50 @@
          	);
          	$this->db->where('post_name', $username);
 		    $this->db->update('user_posts', $postname);
+		    $usertrips = array(
+         		'user'=>$this->input->post('txt_username')
+         	);
+         	$this->db->where('user', $username);
+		    $this->db->update('usertrips', $usertrips);
+
+
+		    $leader = array(
+         		'leader'=>$this->input->post('txt_username')
+         	);
+         	$this->db->where('leader', $username);
+		    $this->db->update('usertrips', $leader);
+
+
+		    $leadmem = array(
+         		'members'=>$this->input->post('txt_username')
+         	);
+         	$this->db->where('members', $username);
+		    $this->db->update('leadmem', $leadmem);
+		    $accountverifier = array(
+         		'username'=>$this->input->post('txt_username')
+         	);
+         	$this->db->where('username', $username);
+		    $this->db->update('accountverifier', $accountverifier);
+		    $requestjoin = array(
+         		'username'=>$this->input->post('txt_username')
+         	);
+         	$this->db->where('username', $username);
+		    $this->db->update('requestjoin', $requestjoin);
+
+  			$tourcomment = array(
+         		'username'=>$this->input->post('txt_username')
+         	);
+
+         	$this->db->where('username', $username);
+		    $query=$this->db->update('tourcomment', $tourcomment);
+		   
+
+
          	$check_session = array(
                     'post_name' => $field['username']
             ); 
             $this->session->set_userdata($check_session);
-         	$this->db->where('id', $id);
+         	$this->db->where('username', $username);
 		    $this->db->update('users', $field);
 		    if($this->db->affected_rows() > 0){
 		      return true;
@@ -309,6 +379,82 @@
 	    }
 	}
 
-  	
+	public function getTrips(){
+		
+		$query=$this->db->get('usertrips');
+		return $query->result();
+	}
+	public function getJoined($username){
+		$this->db->where('members',$username);
+		$this->db->where('restriction','member');
+		$query=$this->db->get('leadmem')->result();
+		
+		/*$var=array();
+		$count=0;
+		$x=0;
+		foreach ($query['member'] as $key ) {
+			$var[]=$key->tripIdNumber;
+			$count++;
+		}
+		
+		for($x=0;$x<$count;$x++){
+			foreach ($result as $post) {
+				if($var[$x]==$post->tripIdNumber){
+						$field=array(
+							'destination' => $post->destination,
+							'origin' => $post->origin,
+							'tourname' => $post->tourname,
+							'tourdate' => $post->tourdate,
+							'leader' => $post->leader,
+							'user' => $username,
+							'restriction' => 'member',
+							'tripIdNumber' => $post->tripIdNumber,
+							'type' => $post->type,
+							'tourparticipant' => $post->tourparticipant,
+							'tourfee' => $post->tourfee,
+							'touritinerary' => $post->touritinerary,
+							'payment' => $post->payment,
+							'tourStatus' => $post->tourStatus
+						);
+						$this->db->insert('usertrips',$field);
+				}
+				
+			}
+		}
+		*/
+		return $query;
+	}
+
+	public function getTripsById($id){
+	    $this->db->where('id', $id);
+	    $query = $this->db->get('usertrips');
+	    if($query->num_rows() > 0){
+	      	return $query->row();
+	    }
+	    else{
+	      	return false;
+	    }
+  	}
+  	public function getTourist(){
+ 		$query=$this->db->get('tbl_blogs');
+ 		return $query->result();
+ 	}
+ 	public function getOrigin(){
+  		$query=$this->db->get('places');
+  		return $query->result();
+  	}
+
+  	public function cancelTrip($tripIdNumber){
+	    $this->db->where('tripIdNumber', $tripIdNumber);
+	    $this->db->delete('usertrips');
+	      $this->db->where('tripIdNumber', $tripIdNumber);
+	    $this->db->delete('leadmem');
+	    if($this->db->affected_rows() > 0){
+	      return true;
+	    }
+	    else{
+	      return false;
+	    }
+  	}	
   	
 }
