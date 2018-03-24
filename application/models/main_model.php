@@ -7,6 +7,15 @@
         $query = $this->db->get();
         return $query;
       }
+      public function getTrips(){
+        $this->db->where('tourStatus','approved');
+        $query=$this->db->get('usertrips');
+        return $query->result();
+      }
+      public function getTouristSpots(){
+        $query=$this->db->get('tbl_blogs');
+        return $query->result();
+      }
   
 
      

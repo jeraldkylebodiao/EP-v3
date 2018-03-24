@@ -3,7 +3,7 @@
  { 
 
  	public function submitTour($username){
- 		echo "wew";
+ 		echo "Kay Ricky Tangalin po to. BOBO PO SYA WALA PO SYANG GAWA";
  	}
  	public function acceptTour($username,$id){
  		$field = array(

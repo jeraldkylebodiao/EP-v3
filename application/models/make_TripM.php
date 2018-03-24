@@ -1,16 +1,17 @@
 <?php  
  class Make_TripM extends CI_Model  
  { 
- 	public function getTourist(){
- 		$query=$this->db->get('tbl_blogs');
- 		return $query->result();
- 	}
- 	public function make_trip(){
-		$field = array(
+  public function getTourist(){
+    $query=$this->db->get('tbl_blogs');
+    return $query->result();
+  }
+  public function make_trip(){
+    $field = array(
             'destination'=>$this->input->post('destination'),
             'origin'=>$this->input->post('origin'),
             'tourname'=>$this->input->post('tourname'),
             'tourdate'=>$this->input->post('tourdate'),
+            'tourduration'=>$this->input->post('tourduration'),
             'leader'=>$this->input->post('leader'),
             'user'=>$this->input->post('user'),
             'restriction'=>$this->input->post('restriction'),
@@ -18,10 +19,9 @@
             'type' => 'tour',
             'tourparticipant'=>$this->input->post('tourparticipant'),
             'tourfee'=>$this->input->post('tourfee'),
-            'touritinerary'=>$this->input->post('touritinerary'),
             'payment'=>$this->input->post('payment'),
-	      	  'tourStatus'=>$this->input->post('tourStatus')
-	      	  //'date'=>date('Y-m-d H:i:s'),
+            'tourStatus'=>$this->input->post('tourStatus')
+            //'date'=>date('Y-m-d H:i:s'),
     );
     /*$restriction = array
     (
@@ -32,6 +32,16 @@
 
     );*/
     $currentDate = date('Y-m-d');
+   /* if ($currentDate>$field['tourdate']) {
+      echo "wew";
+    }
+    elseif ($currentDate<$field['tourdate']) {
+      echo "yown pwede<br/>";
+    }
+    echo "current date: ";
+    print_r($currentDate); echo "<br/>";
+    echo "input date: ";
+    print_r($field['tourdate']); exit(); */
    
    if($this->check_tripIdNumber($field['tripIdNumber'])){
         $var = rand();
@@ -67,17 +77,19 @@
                 'type' => 'tour'
 
               );*/
-              if($this->check_date($field['date'])){
+              if($this->check_date($field['tourdate'])){
               $this->session->set_flashdata('error_msg', 'You currently have a scheduled trip for this day. Please select a different date. ');
               redirect(base_url() . 'trips/maketrip');
-                  }
-                  else{
-                     if($field['date'] > $currentDate){
+              }
+              else{
+                     if($currentDate<$field['tourdate']){
+                         
                          // $this->db->insert('leadmem' ,$restriction2);  
                           $this->db->insert('userTrips', $field2);
+                           return $field2;
                     }
                     else{
-                          $this->session->set_flashdata('error_msg', 'Date invalid 1st loop');
+                          $this->session->set_flashdata('error_msg', 'Date invalid');
                           redirect(base_url() . 'trips/maketrip');
                     }
                   }
@@ -85,21 +97,55 @@
        } 
     }
     else{
-         if($this->check_date($field['date'])){
+         if($this->check_date($field['tourdate'])){
                       $this->session->set_flashdata('error_msg', 'You currently have a scheduled trip for this day. Please select a different date. ');
                       redirect(base_url() . 'trips/maketrip');
             }
-            else{
-               if($field['tourdate'] > $currentDate){
-                   // $this->db->insert('leadmem' ,$restriction);  
-                    $this->db->insert('userTrips', $field);                   
-              }
-              else{
-                    $this->session->set_flashdata('error_msg', 'Date invalid 2nd loop');
-                    redirect(base_url() . 'trips/maketrip');
-              }
+        else{
+            if($currentDate<$field['tourdate']){
+          
+               // $this->db->insert('leadmem' ,$restriction); 
+              
+                $this->db->insert('userTrips', $field); 
+                 return $field;                   
             }
+            else{
+                  
+                  redirect(base_url() . 'trips/maketrip');
+            }
+        }
     }
+}
+public function getTourActivity($tripIdNumber){
+  $this->db->where('tripIdNumber',$tripIdNumber);
+  $query=$this->db->get('tour_activity');
+  return $query->result();
+}
+public function getAct($var){
+  $this->db->where('tourist_name',$var);
+  $query=$this->db->get('tbl_blogs');
+  return $query->result();
+}
+public function getActi(){
+  $query=$this->db->get('tbl_blogs');
+  return $query->result();
+}
+public function addActivity($tripIdNumber){
+  $field= array(
+    'activity' => $this->input->post('activity'),
+    'tripIdNumber' => $this->input->post('tripIdNumber'),
+    'startActDate'=>$this->input->post('startActDate'),
+    'startActTime'=>$this->input->post('startActTime'),
+    'endActTime'=>$this->input->post('endActTime')
+  );
+
+  $query=$this->db->insert('tour_activity',$field);
+  return $query;
+}
+
+public function getActivity(){
+  $query=$this->db->get('touristspot_activities');
+  return $query->result();
 }
 
   public function displaytrip($tripId){
@@ -143,17 +189,17 @@
             'destination'=>$this->input->post('destination'),
             'origin'=>$this->input->post('origin'),
             'name'=>$this->input->post('tripname'),
-            'date'=>$this->input->post('tripdate')
+            'tourdate'=>$this->input->post('tripdate')
          
           );
          $currentDate = date('Y-m-d');
 
-        if($this->check_date_edit($field['date'])){
+        if($this->check_date_edit($field['tourdate'])){
                   $this->session->set_flashdata('error_msg', 'You currently have a scheduled trip for this day. Please select a different date. ');
                   redirect(base_url() . 'dashboard/editTrip/' .$id);
         }
         else{
-           if($field['date'] > $currentDate){
+           if($field['tourdate'] > $currentDate){
                 $this->db->where('id', $id);
                 $this->db->update('usertrips', $field);
                 if($this->db->affected_rows() > 0){
@@ -169,14 +215,14 @@
   }
 
 
-	public function getTrip(){
-  		$query=$this->db->get('usertrips');
-  		return $query->result();
-  	}
-  	public function getOrigin(){
-  		$query=$this->db->get('places');
-  		return $query->result();
-  	}
+  public function getTrip(){
+      $query=$this->db->get('usertrips');
+      return $query->result();
+    }
+    public function getOrigin(){
+      $query=$this->db->get('places');
+      return $query->result();
+    }
     public function getRegion(){
       $query=$this->db->get('region');
       return $query->result();
@@ -190,12 +236,12 @@
       return $query->result();
     }
 
-  	public function addRegion(){
-		$field = array(
-	          'region'=>$this->input->post('region'),
-	          
-		);
-		if($this->check_region($field['region'])){
+    public function addRegion(){
+    $field = array(
+            'region'=>$this->input->post('region'),
+            
+    );
+    if($this->check_region($field['region'])){
               $this->session->set_flashdata('error_msg', 'Region already registered');
               redirect(base_url() . 'trips/region');
           }
@@ -211,11 +257,11 @@
     }
 
     public function addProvince(){
-		$field = array(
-	          'province'=>$this->input->post('province'),
-	          
-		);
-		if($this->check_province($field['province'])){
+    $field = array(
+            'province'=>$this->input->post('province'),
+            
+    );
+    if($this->check_province($field['province'])){
               $this->session->set_flashdata('error_msg', 'Province already registered');
               redirect(base_url() . 'trips/province');
           }
@@ -231,11 +277,11 @@
     }
 
     public function addCity(){
-		$field = array(
-	          'city'=>$this->input->post('city'),
-	          
-		);
-		if($this->check_city($field['city'])){
+    $field = array(
+            'city'=>$this->input->post('city'),
+            
+    );
+    if($this->check_city($field['city'])){
               $this->session->set_flashdata('error_msg', 'City already registered');
               redirect(base_url() . 'trips/city');
           }
@@ -290,6 +336,11 @@
            }  
       }
 
+      public function getprofile(){
+        $this->db->where('status','verified');
+        $query=$this->db->get('accountverifier');
+        return $query->result();
+      }
 
     public function getTours(){
       $this->db->where('tourStatus','approved');
@@ -384,6 +435,10 @@
     $query=$this->db->get('leadmem');
     return $query->result();
 
+  }
+  public function getmembersTour(){
+    $query=$this->db->get('leadmem');
+    return $query->result();
   }
 
 }

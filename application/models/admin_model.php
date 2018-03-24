@@ -10,8 +10,36 @@
 	      return false;
 	    }
 	}
+	public function gtourist($tsId){
+		$this->db->where('tsId',$tsId);
+		$query=$this->db->get('tbl_blogs');
+		return $query->result();
 
+	}
+	public function gtouristactivity($tsId){
+		$this->db->where('tsId',$tsId);
+		$query=$this->db->get('touristspot_activities');
+		return $query->result();
+	}
+	public function getActivity(){
+		$this->db->order_by('activity', 'ASC');
+		$query=$this->db->get('touristspot_activities');
+		return $query->result();
+	}
+	public function submitActivity(){
+		$field = array(
+			'tsId' =>$this->input->post('tsId') ,
+			'activity' =>$this->input->post('activity') 
+		);
+		$query=$this->db->insert('touristspot_activities',$field);
+		return $query;
+	}
+	public function deleteactivity($id){
+		$this->db->where('id',$id);
+		$this->db->delete('touristspot_activities');
+	}
 	public function submit(){
+
 	    $config['upload_path'] = './assets/upload';
 	    $config['allowed_types'] = 'gif|jpg|png|jfif|jpeg';
 	    $this->load->library('upload' , $config);
@@ -24,11 +52,31 @@
 		    $ts_image = $_FILES['userfile']['name'];
 	    }
 	    $field = array(
+		    'tsId'=>$this->input->post('tsId'),
 		    'tourist_name'=>$this->input->post('txt_tourist_name'),
 		    'desc_name'=>$this->input->post('txt_desc_name'),
 		    'address'=>$this->input->post('txt_address'),
 		    'ts_image' => $ts_image,
 	    );
+	    if($this->check_tripIdNumber($field['tsId'])){
+	        	$var = rand();
+		        for ($x = 1; $x <= 1; $x++) {
+		          if($this->check_tripIdNumberExisting($var)){
+		              $var = rand();
+		            $x--;
+		          }
+		          else{
+		            $field = array(
+		                  	'tsId'=>$var,
+						    'tourist_name'=>$this->input->post('txt_tourist_name'),
+						    'desc_name'=>$this->input->post('txt_desc_name'),
+						    'address'=>$this->input->post('txt_address'),
+						    'ts_image' => $ts_image,
+
+		            );
+	        	}
+	        }
+	    }
 	    $this->db->insert('tbl_blogs', $field);
 	    if($this->db->affected_rows() > 0){
 	    	return true;
@@ -37,6 +85,19 @@
 	    	return false;
 	    }
 	}
+
+	 public function check_tripIdNumberExisting($var){
+        $this->db->where('tsId',$var);
+        $this->db->from('tbl_blogs');
+        $query=$this->db->get(); 
+	        return $query->result();    
+	  }
+	  public function check_tripIdNumber($tripIdNumber){
+	        $this->db->where('tsId',$tripIdNumber);
+	        $this->db->from('tbl_blogs');
+	        $query=$this->db->get(); 
+	        return $query->result();    
+	  }
 
 	public function getImage($ts_image){
 		$this->db->where('ts_image', $ts_image);

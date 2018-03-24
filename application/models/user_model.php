@@ -23,6 +23,11 @@
           return false;
         }
     }
+    public function getActivity(){
+    	$this->db->order_by('activity', 'ASC');
+		$query=$this->db->get('touristspot_activities');
+		return $query->result();
+	}
   	public function getEp(){
  		$this->db->order_by('id', 'desc');
 	    $this->db->select('*');
