@@ -1,257 +1,416 @@
+ 
+    
+    
+    
+  
+
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Explore Pinas</title>
+    <title>EXPLOREPINAS</title>
 
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-    <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="assets/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- Fonts -->
+    <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/animate.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/color/default.css" rel="stylesheet">
+  <!--include bootstrap social -->
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-social.css">
 
-    <link href="assets/css/homepage.min.css" rel="stylesheet">
-  </head>
-  <body>
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">Explore Pinas</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Events</a>
-            </li>
-        
-          </ul>
+<style>
+ .team boxed-grey{
+   margin-bottom: 10px;
+ }
+.content {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.content .content-overlay {
+  background: rgba(0,0,0,0.7);
+  position: absolute;
+  height: 99%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay{
+  opacity: 1;
+}
+
+.content-image{
+  width: 100%;
+}
+
+.content-details {
+  position: absolute;
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details{
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+.content-details h3{
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+
+.content-details p{
+  color: #fff;
+  font-size: 0.8em;
+}
+
+.fadeIn-bottom{
+  top: 80%;
+}
+
+.fadeIn-top{
+  top: 20%;
+}
+
+
+
+</style>
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+  <!-- Preloader -->
+  <div id="preloader">
+    <div id="load"></div>
+  </div>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <h1>EXPLORE PINAS</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#intro">Home</a></li>
+    <li><a href="#login">Log in</a></li>
+        <li><a href="#about">About</a></li>
+    <li><a href="#service">Services</a></li>
+    <li><a href="<?php echo base_url().'aishiteru/signup'; ?>">Sign Up</a></li>
+      </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-      </div>
+        <!-- /.container -->
     </nav>
 
-<header class="masthead text-white text-center">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-9 mx-auto">
-            <h1 class="text-center" style="color: black"><strong>LOG IN</strong></h1>
-          </div>
-         
-          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto center">
-               <?php
-                if($this->session->flashdata('success_msg')){
-                ?>
-                    <div class="alert alert-success">
-                      <?php echo $this->session->flashdata('success_msg'); ?>
-                    </div>
-                <?php   
-                  }
-                ?>
-                <?php
-                    if($this->session->flashdata('error_msg')){
-                ?>
-                  <div class="alert alert-success">
-                   <?php echo $this->session->flashdata('error_msg'); ?>
-                  </div>
-                <?php   
-                  }
-                 ?>
-            <?php echo form_open('aishiteru/login_val');?>
-          
-                
-                <div class="form-group">   
-                     <input type="text" name="username" class="form-control" placeholder="Username" / required>  
-                                  
-                </div>  
-                <div class="form-group">   
-                     <input type="password" name="password" class="form-control" placeholder="Password" required />  
-              </div> 
-              
-                <div class="form-group">  
-                     <?php  
-                          echo '<label class="text-danger">'.$this->session->flashdata("error").'</label>';  
-                     ?> 
-                     <br/>
-                     <input type="submit" name="insert" value="Login" class="btn btn-primary btn-lg" />  
-                     <a href="<?php echo base_url('aishiteru/signup'); ?>" class="btn btn-success btn-lg">Sign Up</a>
-                </div>  
-            </form>
-            
-
-
-            
-
-          </div>
-        </div>
-      </div>
-    </header>
-
-
-    <section class="features-icons bg-light text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-pin m-auto text-primary"></i>
-              </div>
-              <h3>Make Trip</h3>
-              <p class="lead mb-0">Create your own Trip and your</p>
-              <a href="#" class="btn btn-info" role="button"> Make</a>     
-       
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-location-pin m-auto text-primary"></i>
-              </div>
-              <h3>Map</h3>
-              <p class="lead mb-0">Locate all the nearby places on your way to your Trip</p>
-        <a href="#" class="btn btn-info" role="button"> View</a>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-directions m-auto text-primary"></i>
-              </div>
-              <h3>Find Trip</h3>
-              <p class="lead mb-0">Look for other Trips which you can also Experience</p>
-        <a href="#" class="btn btn-info" role="button">Find</a>
-            </div>
-      
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="showcase">
-      <div class="container-fluid p-0">
-        <div class="row no-gutters">
-          <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/event.jpg'); "></div>
-          <div class="col-lg-6 order-lg-1  showcase-text">
-            <h2>EVENTS</h2>
-            <p class="lead mb-0">Know the Upcoming Events every city has to offer and has to celebratebnjsnbjsanbjnsajbjs</p>
-      <a href="#" class="btn btn-info" role="button">View</a>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6 order-lg-1 text-white showcase-img" style="background-image: url('assets/img/most.jpg');"></div>
-          <div class="col-lg-6 order-lg-2  showcase-text">
-            <h2>Tourist Spots</h2>
-            <p class="lead mb-0">The top places in the Philippines anjangjansjgnjaNGJSANBJANBJASUJNIANSIBNSNJNJNBHB</p>
-      <a href="#" class="btn btn-info" role="button">View</a>
-          </div>
-        </div>
-        <div class="row no-gutters">
-          <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/iti.png');"></div>
-          <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2>Itinerary</h2>
-            <p class="lead mb-0">vabvbabvjabvjabjvbajvbjabvjbajvbajbvjabjva</p>
-         <a href="#" class="btn btn-info" role="button">Create</a>
-     </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials text-center bg-light">
-      <div class="container">
-        <h2 class="mb-5">User Story</h2>
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="assets/img/1.png" alt="">
-              <h5>User 1</h5>
-              <p class="font-weight-light mb-0">"Travel let me Live the life I always wanted to have"</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="assets/img/1.png" alt="">
-              <h5>User 2</h5>
-              <p class="font-weight-light mb-0">"Live with no Excuses ad travel without regrets"</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-              <img class="img-fluid rounded-circle mb-3" src="assets/img/1.png" alt="">
-              <h5>User 3</h5>
-              <p class="font-weight-light mb-0">"Your wings already Exist, All you have to do is to Fly"</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  <!-- Footer -->
-    <footer class="footer bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item">
-                <a href="#">About</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Contact</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Terms of Use</a>
-              </li>
-              <li class="list-inline-item">&sdot;</li>
-              <li class="list-inline-item">
-                <a href="#">Privacy Policy</a>
-              </li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item mr-3">
-                <a href="#">
-                  <i class="fa fa-facebook fa-2x fa-fw"></i>
-                </a>
-              </li>
-              <li class="list-inline-item mr-3">
-                <a href="#">
-                  <i class="fa fa-twitter fa-2x fa-fw"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-instagram fa-2x fa-fw"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
+  <!-- Section: intro -->
+    <section id="intro" class="intro">
   
+    <div class="slogan">
+      <h2>WELCOME TO EXPLORE PINAS<span class="text_color"></span> </h2>
+      <h4>ITS MORE FUN IN THE PHILIPPINES</h4>
+    </div>
+    <div class="page-scroll">
+      <a href="#service" class="btn btn-circle">
+        <i class="fa fa-angle-double-down animated"></i>
+      </a>
+    </div>
+    </section>
+  <!-- /Section: intro -->
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
 
-  </body>
+  <!-- Section: login -->
+    <section id="login" class="home-section text-center">
+    <div class="heading-contact">
+      <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="wow bounceInDown" data-wow-delay="0.4s">
+          <div class="section-heading">
+          <h2>Log in</h2>
+          <i class="fa fa-2x fa-angle-down"></i>
+
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container">
+    
+    <div class="row">
+      <div class="col-lg-2 col-lg-offset-5">
+        <hr class="marginbot-50">
+      </div>
+    </div>
+
+    
+    <div class="row">
+      <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="boxed-grey">
+              <?php echo form_open('aishiteru/login_val')?>
+                <form id="contact-form" action="<?php echo base_url('main/login_val');?>">
+                <div class="row">
+                   <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input type="text" class="form-control" id="name" name="username" placeholder="Enter name" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+              <input type="password" class="form-control" id="Password" name="password" placeholder="Password" required="required" />
+                        </div>
+            <br>
+             
+            <div class=" col-md-13">
+            <a href="#" target="_blank">Forgot your password?</a> 
+              <button type="submit" class="btn btn-skin btn-primary btn-lg pull-right ">Log In!</button>
+            </div>
+            </div>
+          
+          
+        </div>
+            
+
+            
+                </form>
+            </div>
+    </div>
+    
+    </div>  
+      <div class="col-md-3"></div>
+    
+</div>
+  
+  </section>
+  <!-- /Section: login -->
+  
+  
+  
+  <!-- Section: about -->
+    <section id="about" class="home-section text-center">
+    <div class="heading-about">
+      <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="wow bounceInDown" data-wow-delay="0.4s">
+          <div class="section-heading">
+          <h2>Tours & Travels</h2>
+          <i class="fa fa-2x fa-angle-down"></i>
+
+          </div>
+          </div>
+        </div>
+        
+      </div>
+      </div>
+    </div>
+    
+    
+    <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-lg-offset-5">
+        <hr class="marginbot-50">
+      </div>
+    </div>
+    
+    <div class="row">
+    <?php foreach($trips as $post):?>
+    <div class="col-xs-6 col-sm-3 col-md-6">
+      <div class="wow bounceInUp" data-wow-delay="0.2s">
+                <div class="team boxed-grey">
+                    <div class="inner">
+            <h5><?php echo $post->tourname?></h5>
+                        <p class="subtitle">Destination: <?php echo $post->destination?></p>
+            <div class="content">
+            <div class="content-overlay"></div>
+                       <div class="content-image">
+            
+            <center>
+                        <div class="polaroid">  
+          <?php foreach($blogs as $value):?>
+            <?php if($post->destination == $value->tourist_name):?>
+            <img style="width: 100%;"; src="<?php echo base_url().'assets/upload/'.$value->ts_image;?>">
+          <?php endif;?>
+          <?php endforeach;?>
+            <div class="content-details fadeIn-top">
+            <h3>Visit this tour</h3>
+            
+            </div>
+            </div>
+            </div>
+            </center>
+            </div>
+            </div>
+        
+                </div>
+      </div>
+    </div>
+  
+            
+    <?php endforeach;?>
+  </div>
+  </section>
+  <!-- /Section: about -->
+
+  
+  
+  
+  <!-- Section: services -->
+    <section id="service" class="home-section text-center bg-gray">
+    
+    <div class="heading-about">
+      <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="wow bounceInDown" data-wow-delay="0.4s">
+          <div class="section-heading">
+          <h2>Our Services</h2>
+          <i class="fa fa-2x fa-angle-down"></i>
+
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-lg-offset-5">
+        <hr class="marginbot-50">
+      </div>
+    </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3">
+        <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="service-box">
+          <div class="service-icon">
+            <img src="img/icons/service-icon-1.png" alt="" />
+          </div>
+          <div class="service-desc">
+            <h5>Print</h5>
+            <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+          </div>
+                </div>
+        </div>
+            </div>
+      <div class="col-sm-3 col-md-3">
+        <div class="wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-box">
+          <div class="service-icon">
+            <img src="img/icons/service-icon-2.png" alt="" />
+          </div>
+          <div class="service-desc">
+            <h5>Web Design</h5>
+            <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+          </div>
+                </div>
+        </div>
+            </div>
+      <div class="col-sm-3 col-md-3">
+        <div class="wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-box">
+          <div class="service-icon">
+            <img src="img/icons/service-icon-3.png" alt="" />
+          </div>
+          <div class="service-desc">
+            <h5>Photography</h5>
+            <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+          </div>
+                </div>
+        </div>
+            </div>
+      <div class="col-sm-3 col-md-3">
+        <div class="wow fadeInRight" data-wow-delay="0.2s">
+                <div class="service-box">
+          <div class="service-icon">
+            <img src="img/icons/service-icon-4.png" alt="" />
+          </div>
+          <div class="service-desc">
+            <h5>Cloud System</h5>
+            <p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
+          </div>
+                </div>
+        </div>
+            </div>
+        </div>    
+    </div>
+  </section>
+  <!-- /Section: services -->
+  
+  
+    
+  <!-- /Section: contact -->
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <div class="wow shake" data-wow-delay="0.4s">
+          <div class="page-scroll marginbot-30">
+            <a href="#intro" id="totop" class="btn btn-circle">
+              <i class="fa fa-angle-double-up animated"></i>
+            </a>
+          </div>
+          </div>
+          <p>&copy;Copyright 2018 - EXPLOREPINAS. All rights reserved.</p>
+        </div>
+      </div>  
+    </div>
+  </footer>
+
+    <!-- Core JavaScript Files -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>  
+  <script src="assets/js/jquery.scrollTo.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="assets/js/custom.js"></script>
+
+</body>
 
 </html>
+
