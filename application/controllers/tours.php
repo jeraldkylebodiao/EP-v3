@@ -8,7 +8,10 @@
     	}
 
     	public function maketour($username){
-    		$this->m->submitTour($username);
+        $this->load->view('template/header');
+        $this->load->view('map/destination');
+        $this->load->view('template/footer');
+    		//$this->m->submitTour($username);
     	}
 
     	public function acceptTour($username,$tripIdNumber){
