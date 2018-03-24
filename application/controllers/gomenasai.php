@@ -12,9 +12,9 @@
 			$array['spots']=$this->m->getBlog();
 			$array['posts']=$this->m->getPosts();
 			$array['editors']=$this->m->getEditors();
-			$this->load->view("template/header");
+			
 			$this->load->view("adminpage/admin",$array);
-			$this->load->view("template/footer");
+		
 		}
 		elseif ($this->session->userdata('u_id')=='2') {
 		redirect(base_url() . 'dashboard/user');
@@ -23,11 +23,31 @@
 		redirect(base_url());
 		}
 	}
+	public function addactivity($tsId){
+		$data['tourist']=$this->m->gtourist($tsId);
+		$data['activity']=$this->m->gtouristactivity($tsId);
+		$this->load->view('activity/addactivity',$data);
+	}
+	public function submitActivity(){
+		$result=$this->m->submitActivity();
+		$id=$this->input->post('tsId');
+		 if($result){
+		      $this->session->set_flashdata('success_msg', 'Activity added successfully');
+		 }
+		  redirect(base_url('gomenasai/addactivity/') . $id);
+		
+	}
+	public function deleteactivity($id,$tsId){
+		$this->m->deleteactivity($id);
+		 redirect(base_url('gomenasai/addactivity/') . $tsId);
+	}
+
 
 	function tourist_spot(){
 		if ($this->session->userdata('u_id')=='1') {
 		    $data['blogs'] = $this->m->getBlog();
-		    $this->load->view('layout/header');
+		    $data['activity'] = $this->m->getActivity();
+		   
 		    $this->load->view('crud/touristspot', $data);
 		    $this->load->view('layout/footer');
 		}
