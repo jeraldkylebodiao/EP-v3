@@ -5,9 +5,9 @@
       function __construct(){
             parent:: __construct();
             $this->load->model('user_model','m');
-    	}      
+      }      
 
-    	public function user(){
+      public function user(){
            $getSession = $this->m->getSession($this->session->userdata('post_name'));
                 if ($getSession) {
                  
@@ -37,6 +37,7 @@
       }
       public function tourist_spot(){
          $data['spots'] = $this->m->getTouristSpot();
+        $data['activity'] = $this->m->getActivity();
          $this->load->view('userpage/tourist_spot',$data);
       }
       public function stories(){
