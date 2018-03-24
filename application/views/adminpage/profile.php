@@ -102,9 +102,7 @@
 		    	<div class="group row">
 		  		<label class="col-md-6 text-right" style="font-weight: bold">Registration Fee:</label>
 		    	<label class="col-md-6"><?php echo $info->tourfee?></label></div>
-		    	<div class="group row">
-		  		<label class="col-md-6 text-right" style="font-weight: bold">Itineraries:</label>
-		    	<label class="col-md-6"><?php echo $info->touritinerary?></label></div>
+		    	
 		    	<div class="group row">
 		  		<label class="col-md-6 text-right" style="font-weight: bold">Payment:</label>
 		    	<label class="col-md-6"><?php echo $info->payment?></label></div>
