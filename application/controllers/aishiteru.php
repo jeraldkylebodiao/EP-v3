@@ -11,7 +11,9 @@
       public function login()  
       {  
           if($this->session->userdata('u_id')==''){
-            $this->load->view("mainpage/login"); 
+            $data['trips']=$this->m->getTrips();
+            $data['blogs']=$this->m->getTouristSpots();
+            $this->load->view('mainpage/login',$data); 
           }
            elseif ($this->session->userdata('u_id')=='1') {
            redirect(base_url() . 'gomenasai/bakana');
@@ -23,9 +25,9 @@
       public function signup()  
       {  
           if($this->session->userdata('u_id')==''){
-           $this->load->view("template/header");
+         
            $this->load->view("mainpage/signup"); 
-           $this->load->view("template/footer"); 
+       
          }
          elseif ($this->session->userdata('u_id')=='1') {
            redirect(base_url() . 'gomenasai/bakana');
