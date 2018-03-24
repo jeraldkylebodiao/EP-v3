@@ -98,10 +98,7 @@
             <label class="col-md-6 text-right">Join Fee:</label>
             <label class="col=md-6 text-left"><?php print_r($var3);?></label>
           </div>
-          <div class="row">
-            <label class="col-md-6 text-right">Itinerary:</label>
-            <label class="col=md-6 text-left"><?php echo $post->touritinerary?></label>
-          </div>
+         
         <?php endforeach;?>
       <?php endif;?>
     </div>

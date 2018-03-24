@@ -37,6 +37,8 @@
   				<div class="row">
   					<label class="col-md-6 text-right">Destination:</label>
   					<label class="col=md-6 text-left"><?php echo $post->destination?></label>
+            <?php $var=$post->destination;?>
+            <?php $tripIdNumber=$post->tripIdNumber;?>
   				</div>
   				<div class="row">
   					<label class="col-md-6 text-right">Meeting Place:</label>
@@ -59,12 +61,120 @@
   					<label class="col-md-6 text-right">Join Fee:</label>
   					<label class="col=md-6 text-left"><?php print_r($var3);?></label>
   				</div>
-  				<div class="row">
-  					<label class="col-md-6 text-right">Itinerary:</label>
-  					<label class="col=md-6 text-left"><?php echo $post->touritinerary?></label>
-  				</div>
+  			
   			<?php endforeach;?>
   		<?php endif;?>
+  </div>
+   <div class="container">
+   
+      
+    <div class="container" style="background-color: white;" >
+      
+       
+  <div class="row">
+    <div class="col-md-4">
+      <?php echo form_open('trips/addActivity/'.$this->session->userdata('post_name').'/'.$tripIdNumber);?>
+    <input type="hidden" name="tripIdNumber" value="<?php echo $tripIdNumber;?>">
+    <h1>Add Activity for you Tour</h1>
+    <hr/>
+         <select class="custom-select"  name="activity">
+          <?php foreach($tours as $usertrips):?>
+            <?php foreach($spots as $spot):?>
+              <?php foreach($touract as $tact):?>
+                <?php if($usertrips->destination == $spot->tourist_name):?>
+                  <?php if($spot->tsId == $tact->tsId):?>
+                          
+                          <option ><?php echo $tact->activity?></option>
+                  <?php endif;?>
+                <?php endif;?>
+              <?php endforeach;?>
+            <?php endforeach;?>
+          <?php endforeach;?>
+                 
+        </select><hr/>
+        <div class="row">
+            <hr/>
+            <label>Start Date</label>
+            <input style="width: 100%" type="date" name="startActDate" required/>
+            <hr/>
+          
+        </div>
+         <div class="row">
+          <div class="col-md-5">
+            <hr/>
+            <label>Start</label>
+            <input style="width: 100%" type="time" name="startActTime" required/>
+            <hr/>
+          </div>
+          <div class="col-md-2"></div>
+          <div class="col-md-5">
+            <hr/>
+            <label> End Time</label>
+             <input style="width: 100%" type="time" name="endActTime" required/>
+             <hr/>
+          </div>
+        </div>
+        
+       <hr/>
+        <input type="submit" name="insert" value="Add Activity" class="btn btn-primary btn-sm" />
+ <br/><br/><br/><br/><br/>
+
+           </form>
+           <hr/>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+      <h1>Included Activities</h1><hr/>
+        <center><?php
+                if($this->session->flashdata('success_msg')){
+                ?>
+                    <div class="alert alert-success">
+                      <?php echo $this->session->flashdata('success_msg'); ?>
+                    </div>
+                <?php   
+                  }
+                ?>
+                <?php
+                    if($this->session->flashdata('error_msg')){
+                ?>
+                  <div class="alert alert-danger">
+                   <?php echo $this->session->flashdata('error_msg'); ?>
+                  </div>
+                <?php   
+                  }
+                 ?></center>
+     <?php foreach ($current as $curr): ?>
+      <div class="col-md-12" style="text-align: center; font-size: 20px; font-weight: bold">
+          <label><?php echo $curr->activity?></label>
+        
+      </div>
+          <br/>
+          <div class="row" style="text-align: center">
+              <div class="col-md-4">
+                  <label style="font-weight: bold">Date</label><br/>
+                  <label><?php echo $curr->startActDate?></label>
+              </div>
+              <div class="col-md-4">
+                  <label style="font-weight: bold">Start Time</label><br/>
+                  <label><?php echo $curr->startActTime?></label>
+              </div>
+              <div class="col-md-4">
+                  <label style="font-weight: bold">End Time</label><br/>
+                  <label><?php echo $curr->endActTime?></label>
+              </div>
+          </div>
+         
+          <hr/>
+
+    <?php endforeach;?>
+      
+    </div>
+  </div>
+     
+        
+
+
+
   </div>
 
   <div class="container" style="background-color: white">
@@ -74,7 +184,7 @@
 	  		<?php if($members):?>
 	  			<?php foreach($members as $mem):?>
 	  				<?php if($mem->restriction!='leader'):?>
-	  					<label style="color: red; font-weight: bold"> - <?php echo $mem->members?></label>
+	  					<label style="color: red; font-weight: bold; "> @ <?php echo $mem->members?></label><br/>
 	  				<?php endif;?>
 	  				<?php if($mem->restriction=='member'):?>
 	  					<?php $var++;?>
@@ -108,6 +218,7 @@
   		</div>
   </div>
  </div>
+  </div>
 
 
   <div class="container" style="background-color: white">
