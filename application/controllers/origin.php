@@ -8,12 +8,16 @@
 	        $this->load->model('originModel','m');
 	    }
 	    public function addOP(){
+
 	    	 if ($this->session->userdata('u_id')=='1') {
 			    	$data['region']=$this->m->getRegion();
 			    	$data['province']=$this->m->getProvince();
 			    	$data['city']=$this->m->getCity();
 			    	$data['places']=$this->m->getPlaces();
+			    	$this->load->view('layout/header');
 			    	$this->load->view('places/places',$data);
+			    	$this->load->view('layout/footer');
+
 	    	   }
 	        elseif($this->session->userdata('u_id')=='2'){
 	            redirect(base_url() . 'dashboard/user');
@@ -41,7 +45,9 @@
 	        $data['region']=$this->m->getRegion();
 	    	$data['province']=$this->m->getProvince();
 	    	$data['city']=$this->m->getCity();
+	    	$this->load->view('layout/header');
 	      	$this->load->view('places/edit', $data);
+	      	$this->load->view('layout/footer');
 	       
 	    }
 	     elseif($this->session->userdata('u_id')=='2'){
